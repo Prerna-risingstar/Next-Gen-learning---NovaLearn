@@ -1,5 +1,7 @@
 # NovaLearn - Student Dashboard 🚀
 
+**🌍 Live Demo:** [https://next-gen-learning-nova-learn-7qvoy8aqh.vercel.app/](https://next-gen-learning-nova-learn-7qvoy8aqh.vercel.app/)
+
 Welcome to **NovaLearn**, a next-gen,  educational dashboard built with modern web technologies. This project is my submission for the Frontend Intern Challenge. It focuses on zero layout shifts, buttery-smooth animations, and server-rendered data!
 
 ## 📸 Overview
