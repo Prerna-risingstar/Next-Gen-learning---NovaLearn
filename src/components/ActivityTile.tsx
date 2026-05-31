@@ -1,19 +1,26 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
+import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
 export function ActivityTile() {
-  // Generate random data for the mock activity graph
-  const generateActivityData = () => {
-    const data = [];
-    for (let i = 0; i < 7; i++) {
-      data.push(Math.floor(Math.random() * 100));
-    }
-    return data;
-  };
-  
-  const data = generateActivityData();
-  const maxValue = Math.max(...data, 100);
+  const [timeframe, setTimeframe] = useState<"weekly" | "monthly">("weekly");
+
+  const chartData = timeframe === "weekly" ? [
+    { day: 'Mon', value: 45 },
+    { day: 'Tue', value: 80 },
+    { day: 'Wed', value: 30 },
+    { day: 'Thu', value: 90 },
+    { day: 'Fri', value: 65 },
+    { day: 'Sat', value: 100 },
+    { day: 'Sun', value: 50 },
+  ] : [
+    { day: 'Week 1', value: 120 },
+    { day: 'Week 2', value: 250 },
+    { day: 'Week 3', value: 180 },
+    { day: 'Week 4', value: 290 },
+  ];
 
   return (
     <motion.article 
@@ -25,28 +32,32 @@ export function ActivityTile() {
       
       <div className="relative z-10 flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold tracking-tight">Learning Activity</h2>
-        <span className="text-xs font-medium px-2 py-1 bg-white/10 rounded-lg text-gray-300">This Week</span>
+        <select 
+          value={timeframe}
+          onChange={(e) => setTimeframe(e.target.value as "weekly" | "monthly")}
+          className="text-xs font-medium px-2 py-1 bg-white/10 rounded-lg text-gray-300 border-none outline-none cursor-pointer focus:ring-1 focus:ring-accent"
+        >
+          <option value="weekly" className="bg-card text-white">This Week</option>
+          <option value="monthly" className="bg-card text-white">This Month</option>
+        </select>
       </div>
 
-      <div className="relative z-10 flex items-end justify-between gap-2 h-32 w-full mt-auto">
-        {data.map((value, i) => {
-          const heightPercentage = `${(value / maxValue) * 100}%`;
-          const days = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
-          
-          return (
-            <div key={i} className="flex flex-col items-center gap-2 flex-1 group/bar">
-              <div className="w-full relative h-full flex items-end justify-center">
-                <motion.div 
-                  initial={{ height: 0 }}
-                  animate={{ height: heightPercentage }}
-                  transition={{ type: "spring", damping: 20, stiffness: 100, delay: i * 0.1 }}
-                  className="w-full max-w-[2rem] bg-accent/30 rounded-t-sm group-hover/bar:bg-accent transition-colors duration-300"
-                />
-              </div>
-              <span className="text-xs text-gray-500 font-medium">{days[i]}</span>
-            </div>
-          );
-        })}
+      <div className="relative z-10 w-full h-[150px] mt-auto">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={chartData} margin={{ top: 10, right: 0, left: 0, bottom: 0 }}>
+            <XAxis dataKey="day" stroke="#888888" fontSize={12} tickLine={false} axisLine={false} />
+            <Tooltip 
+              cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+              contentStyle={{ backgroundColor: 'rgba(0,0,0,0.8)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px' }}
+              itemStyle={{ color: '#3b82f6' }}
+            />
+            <Bar dataKey="value" radius={[4, 4, 0, 0]}>
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill="#3b82f6" fillOpacity={0.8} className="hover:fill-opacity-100 transition-opacity duration-300" />
+              ))}
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </motion.article>
   );

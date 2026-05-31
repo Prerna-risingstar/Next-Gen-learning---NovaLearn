@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { createClient } from "@/lib/supabase/server";
 import { HeroTile } from "@/components/HeroTile";
 import { ActivityTile } from "@/components/ActivityTile";
+import { PomodoroTimer } from "@/components/PomodoroTimer";
 import { CourseCard } from "@/components/CourseCard";
 import { DashboardGrid, GridItem } from "@/components/DashboardGrid";
 import { DashboardSkeleton, CourseSkeleton } from "@/components/Skeletons";
@@ -11,6 +12,8 @@ export const dynamic = 'force-dynamic';
 
 async function CourseList() {
   const supabase = await createClient();
+  
+  // The user must configure their Supabase RLS policies to allow public reads
   const { data: courses, error } = await supabase
     .from("courses")
     .select("*")
@@ -19,8 +22,9 @@ async function CourseList() {
   if (error) {
     return (
       <div className="col-span-full bg-red-500/10 border border-red-500/20 text-red-500 p-6 rounded-3xl">
-        <h3 className="font-bold text-lg mb-2">Error Loading Courses</h3>
+        <h3 className="font-bold text-lg mb-2">Database Connection Failed</h3>
         <p className="text-sm opacity-80">{error.message}</p>
+        <p className="text-xs opacity-60 mt-2">Ensure Supabase RLS policies allow public reads for the 'courses' table.</p>
       </div>
     );
   }
@@ -44,16 +48,20 @@ async function CourseList() {
   );
 }
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
   return (
     <div className="max-w-7xl mx-auto">
       <DashboardGrid>
         <GridItem className="col-span-1 md:col-span-2 lg:col-span-3">
-          <HeroTile />
+          <HeroTile userName="Student" />
         </GridItem>
         
         <GridItem className="col-span-1 md:col-span-1 lg:col-span-2">
           <ActivityTile />
+        </GridItem>
+
+        <GridItem className="col-span-1 md:col-span-1 lg:col-span-1">
+          <PomodoroTimer />
         </GridItem>
 
         <Suspense 

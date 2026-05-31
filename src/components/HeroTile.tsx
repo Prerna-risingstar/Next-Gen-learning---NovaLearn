@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { Flame } from "lucide-react";
 
-export function HeroTile() {
+export function HeroTile({ userName }: { userName?: string }) {
+  const displayName = userName || "Student";
   return (
     <motion.article 
       className="col-span-1 md:col-span-2 lg:col-span-3 bg-card border border-border rounded-3xl p-6 lg:p-10 relative overflow-hidden group"
@@ -11,14 +12,14 @@ export function HeroTile() {
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
       {/* Subtle hover glow effect */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-accent/0 via-accent/0 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-accent/0 via-accent/0 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
       
-      <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="relative z-20 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <h1 className="text-3xl lg:text-5xl font-bold tracking-tight mb-2">
-            Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Prerna</span>
+            Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">{displayName}</span>
           </h1>
-          <p className="text-gray-400 text-lg">You've learned for 4 hours this week. Keep it up!</p>
+          <p className="text-gray-400 text-lg">You've learned for 11 hrs this week, and 45 hrs this month. Keep it up!</p>
         </div>
         
         <div className="flex items-center gap-4 bg-background/50 border border-border p-4 rounded-2xl backdrop-blur-sm self-start md:self-auto shadow-inner">

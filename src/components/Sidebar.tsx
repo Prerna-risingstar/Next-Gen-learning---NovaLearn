@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { LayoutDashboard, BookOpen, Activity, Settings, User, LogOut } from "lucide-react";
+import { LayoutDashboard, BookOpen, Activity, Settings, User, LogOut, FileText, GraduationCap, Trophy, Calendar, Bot, Award, Users, CheckSquare } from "lucide-react";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,7 +9,14 @@ import { usePathname } from "next/navigation";
 const NAV_ITEMS = [
   { id: "/", label: "Dashboard", icon: LayoutDashboard },
   { id: "/courses", label: "Courses", icon: BookOpen },
-  { id: "/activity", label: "Activity", icon: Activity },
+  { id: "/ai-tutor", label: "AI Tutor", icon: Bot },
+  { id: "/community", label: "Community", icon: Users },
+  { id: "/leaderboard", label: "Leaderboard", icon: Trophy },
+  { id: "/schedule", label: "Schedule", icon: Calendar },
+  { id: "/assignments", label: "Assignments", icon: FileText },
+  { id: "/exams", label: "Results", icon: GraduationCap },
+  { id: "/quiz", label: "Quiz Engine", icon: CheckSquare },
+  { id: "/certificates", label: "Certificates", icon: Award },
   { id: "/profile", label: "Profile", icon: User },
   { id: "/settings", label: "Settings", icon: Settings },
 ];
@@ -61,10 +68,6 @@ export function Sidebar() {
         </ul>
       </div>
 
-      <button className="hidden md:flex items-center gap-3 p-3 text-gray-400 hover:text-white transition-colors duration-200 rounded-xl hover:bg-white/5 w-full">
-        <LogOut className="w-5 h-5 shrink-0" />
-        <span className="hidden lg:block font-medium">Log out</span>
-      </button>
     </nav>
   );
 }
