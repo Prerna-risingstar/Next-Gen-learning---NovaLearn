@@ -1,6 +1,6 @@
 # NovaLearn - Student Dashboard 🚀
 
-Welcome to **NovaLearn**, a next-gen, dark-mode educational dashboard built with modern web technologies. This project is my submission for the Frontend Intern Challenge. It focuses on zero layout shifts, buttery-smooth animations, and server-rendered data!
+Welcome to **NovaLearn**, a next-gen,  educational dashboard built with modern web technologies. This project is my submission for the Frontend Intern Challenge. It focuses on zero layout shifts, buttery-smooth animations, and server-rendered data!
 
 ## 📸 Overview
 NovaLearn is built with a sleek "Bento Grid" layout, utilizing deep background tones and subtle, glowing gradients. The dashboard is fully responsive, gracefully degrading from a multi-column desktop layout to a stacked, scrollable mobile experience.
